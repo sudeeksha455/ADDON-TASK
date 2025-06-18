@@ -1,0 +1,142 @@
+DAY - 1
+
+TASK-1 
+
+1] print all even numbers between 1 and 100
+
+public class EvenNumbers {
+    public static void main(String[] args) {
+        System.out.println("Even numbers from 1 to 100:");
+        for (int i = 1; i <= 100; i++) {
+            if (i % 2 == 0) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+}
+
+
+TASK-2
+
+2]simple interest calculator using if
+
+import java.util.Scanner;
+
+public class SimpleInterest {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter P, R, T: ");
+        double p = sc.nextDouble(), r = sc.nextDouble(), t = sc.nextDouble();
+
+        if (p > 0 && r > 0 && t > 0) {
+            System.out.println("Simple Interest = " + (p * r * t) / 100);
+        } else {
+            System.out.println("All values must be greater than 0.");
+        }
+
+        sc.close();
+    }
+}
+
+
+TASK-3
+
+3]check for a leap year using the method
+
+import java.util.Scanner;
+
+public class LeapYear {
+    static boolean isLeap(int y) {
+        return (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter year: ");
+        int y = sc.nextInt();
+
+        System.out.println(y + (isLeap(y) ? " is a Leap Year." : " is not a Leap Year."));
+        sc.close();
+    }
+}
+
+
+MAIN PROG
+
+4]menu-driven calculator using switch and methods(add,subtract,multiple,divide)
+import java.util.Scanner;
+
+public class Calculator {
+
+    // Method for addition
+    static double add(double a, double b) {
+        return a + b;
+    }
+
+    // Method for subtraction
+    static double subtract(double a, double b) {
+        return a - b;
+    }
+
+    // Method for multiplication
+    static double multiply(double a, double b) {
+        return a * b;
+    }
+
+    // Method for division
+    static double divide(double a, double b) {
+        if (b != 0)
+            return a / b;
+        else {
+            System.out.println("Error: Division by zero!");
+            return 0;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        double num1 = sc.nextDouble();
+
+        System.out.print("Enter second number: ");
+        double num2 = sc.nextDouble();
+
+        System.out.println("\nMenu:");
+        System.out.println("1. Add");
+        System.out.println("2. Subtract");
+        System.out.println("3. Multiply");
+        System.out.println("4. Divide");
+
+        System.out.print("Choose an operation (1-4): ");
+        int choice = sc.nextInt();
+
+        double result = 0;
+
+        switch (choice) {
+            case 1:
+                result = add(num1, num2);
+                break;
+            case 2:
+                result = subtract(num1, num2);
+                break;
+            case 3:
+                result = multiply(num1, num2);
+                break;
+            case 4:
+                result = divide(num1, num2);
+                break;
+            default:
+                System.out.println("Invalid choice.");
+                sc.close();
+                return;
+        }
+
+        System.out.println("Result: " + result);
+        sc.close();
+    }
+}
+
+
+
