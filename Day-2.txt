@@ -1,0 +1,109 @@
+DAY - 2
+
+TASK-1
+
+1]input an array of numbers and display the reverse
+
+
+import java.util.Scanner;
+
+public class ReverseArray {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+
+        System.out.println("Enter " + n + " numbers:");
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+
+        System.out.println("Reversed array:");
+        for (int i = n - 1; i >= 0; i--) System.out.print(arr[i] + " ");
+
+        sc.close();
+    }
+}
+
+
+TASK-2
+
+2] count vowels and consonants in a string
+
+import java.util.Scanner;
+
+public class VowelConsonantCount {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String s = sc.nextLine().toLowerCase();
+
+        int v = 0, c = 0;
+        for (char ch : s.toCharArray()) {
+            if (Character.isLetter(ch)) {
+                if ("aeiou".contains(ch + "")) v++;
+                else c++;
+            }
+        }
+
+        System.out.println("Vowels: " + v);
+        System.out.println("Consonants: " + c);
+        sc.close();
+    }
+}
+
+
+TASK-3
+
+3]accept sentence,split into words
+
+import java.util.Scanner;
+
+public class SplitSentence {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a sentence: ");
+        String sentence = sc.nextLine();
+
+        String[] words = sentence.split(" ");
+
+        System.out.println("Words in the sentence:");
+        for (String word : words) {
+            System.out.println(word);
+        }
+
+        sc.close();
+    }
+}
+
+
+MAIN PROG
+
+4]string analyzer (word count,character count,reverse,and longest word)
+
+import java.util.Scanner;
+
+public class StringAnalyzer {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a sentence: ");
+        String s = sc.nextLine();
+
+        String[] words = s.trim().split("\\s+");
+        int wordCount = words.length, charCount = 0;
+        String longest = "", reverse = new StringBuilder(s).reverse().toString();
+
+        for (char c : s.toCharArray())
+            if (c != ' ') charCount++;
+
+        for (String w : words)
+            if (w.length() > longest.length()) longest = w;
+
+        System.out.println("Words: " + wordCount);
+        System.out.println("Characters: " + charCount);
+        System.out.println("Reversed: " + reverse);
+        System.out.println("Longest word: " + longest);
+
+        sc.close();
+    }
+}

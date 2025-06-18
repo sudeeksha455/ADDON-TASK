@@ -1,0 +1,150 @@
+DAY - 3
+
+TASK-1
+
+1]bankaccount class with deposit/withdraw methods
+
+import java.util.Scanner;
+
+class BankAccount {
+    private double balance;
+
+    BankAccount(double bal) { balance = bal; }
+
+    void deposit(double amt) { if (amt > 0) balance += amt; }
+
+    void withdraw(double amt) {
+        if (amt > 0 && amt <= balance) balance -= amt;
+        else System.out.println("Insufficient funds.");
+    }
+
+    void show() { System.out.println("Balance: ₹" + balance); }
+}
+
+public class BankApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        BankAccount acc = new BankAccount(1000);
+
+        System.out.print("Deposit: "); acc.deposit(sc.nextDouble());
+        System.out.print("Withdraw: "); acc.withdraw(sc.nextDouble());
+
+        acc.show();
+        sc.close();
+    }
+}
+
+TASK-2
+
+2]person - employee class with salary calculation
+
+import java.util.Scanner;
+
+class Person {
+    String name;
+    int age;
+
+    void input(Scanner sc) {
+        System.out.print("Enter name: ");
+        name = sc.nextLine();
+        System.out.print("Enter age: ");
+        age = sc.nextInt();
+        sc.nextLine(); // Consume leftover newline
+    }
+}
+
+class Employee extends Person {
+    double basic, salary;
+
+    void inputSalary(Scanner sc) {
+        System.out.print("Enter basic salary: ");
+        basic = sc.nextDouble();
+        double hra = basic * 0.2;
+        double da = basic * 0.1;
+        salary = basic + hra + da;
+    }
+
+    void show() {
+        System.out.println("\nName: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Salary: ₹" + salary);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Employee e = new Employee();
+        e.input(sc);
+        e.inputSalary(sc);
+        e.show();
+        sc.close();
+    }
+}
+
+TASK-3
+
+3]demonstrate overloading(sum(int,int)and sum(double,double))
+
+public class OverloadSum {
+    
+    // sum for integers
+    static int sum(int a, int b) {
+        return a + b;
+    }
+
+    // sum for doubles
+    static double sum(double a, double b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Sum of ints: " + sum(10, 20));
+        System.out.println("Sum of doubles: " + sum(10.5, 20.3));
+    }
+}
+
+
+MAIN PROG
+
+4]student management system (create student,assign marks,display results)
+
+
+import java.util.Scanner;
+
+class Student {
+    String name;
+    int[] marks = new int[3];
+
+    void inputDetails(Scanner sc) {
+        System.out.print("Enter student name: ");
+        name = sc.nextLine();
+        System.out.println("Enter marks for 3 subjects:");
+        for (int i = 0; i < 3; i++)
+            marks[i] = sc.nextInt();
+    }
+
+    void displayResult() {
+        int total = 0;
+        for (int m : marks) total += m;
+        double avg = total / 3.0;
+        String result = (avg >= 40) ? "Pass" : "Fail";
+
+        System.out.println("\nName: " + name);
+        System.out.println("Total: " + total);
+        System.out.println("Average: " + avg);
+        System.out.println("Result: " + result);
+    }
+}
+
+public class StudentApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Student s = new Student();
+        s.inputDetails(sc);
+        s.displayResult();
+        sc.close();
+    }
+}
+
+

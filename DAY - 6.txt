@@ -1,0 +1,128 @@
+DAY - 6
+
+TASK-1
+
+1]create a thread by extending the thread class to print numbers 1-10 
+
+class NumberThread extends Thread {
+    public void run() {
+        for (int i = 1; i <= 10; i++)
+            System.out.println(i);
+    }
+
+    public static void main(String[] args) {
+        NumberThread t = new NumberThread();
+        t.start();
+    }
+}
+
+
+TASK-2
+
+2]implement runnable to print a message from multiple threads
+
+class MessagePrinter implements Runnable {
+    private String message;
+
+    MessagePrinter(String message) {
+        this.message = message;
+    }
+
+    public void run() {
+        System.out.println("Thread says: " + message);
+    }
+
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new MessagePrinter("Hello from Thread 1"));
+        Thread t2 = new Thread(new MessagePrinter("Hello from Thread 2"));
+        Thread t3 = new Thread(new MessagePrinter("Hello from Thread 3"));
+
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}
+
+
+TASK-3
+
+3]demonstrate sleep() and join() using thread coordination
+
+class SleeperThread extends Thread {
+    public void run() {
+        try {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println(getName() + " - Count: " + i);
+                Thread.sleep(500); // Pause for 500 milliseconds
+            }
+        } catch (InterruptedException e) {
+            System.out.println(getName() + " interrupted.");
+        }
+    }
+}
+
+public class ThreadDemo {
+    public static void main(String[] args) {
+        SleeperThread t1 = new SleeperThread();
+        SleeperThread t2 = new SleeperThread();
+
+        t1.setName("Thread 1");
+        t2.setName("Thread 2");
+
+        t1.start();
+        try {
+            t1.join(); // Wait until t1 finishes before starting t2
+        } catch (InterruptedException e) {
+            System.out.println("Main thread interrupted.");
+        }
+
+        t2.start();
+    }
+}
+
+
+MAIN PROG
+
+4]multiple users(threads)are trying to book tickets
+  use a synchronized method/block to avoid race conditions
+  include sleep() to simulate delays
+  display booking status and remaining seats after each booking
+
+class TicketBooking {
+    int seats = 5;
+
+    synchronized void book(String user, int req) {
+        System.out.println(user + " tries " + req + " seat(s)");
+        if (req <= seats) {
+            try { Thread.sleep(500); } catch (Exception e) {}
+            seats -= req;
+            System.out.println(user + " booked " + req + " seat(s). Left: " + seats);
+        } else {
+            System.out.println("Not enough seats for " + user);
+        }
+    }
+}
+
+class User extends Thread {
+    TicketBooking b; String name; int req;
+
+    User(TicketBooking b, String name, int req) {
+        this.b = b; this.name = name; this.req = req;
+    }
+
+    public void run() {
+        b.book(name, req);
+    }
+}
+
+public class TicketApp {
+    public static void main(String[] args) {
+        TicketBooking b = new TicketBooking();
+        new User(b, "Alice", 2).start();
+        new User(b, "Bob", 2).start();
+        new User(b, "Charlie", 2).start();
+    }
+}
+
+
+
